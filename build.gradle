@@ -3,9 +3,13 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 }
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
 
 group = 'com.alayon'
 version = '0.0.1-SNAPSHOT'
+
 sourceCompatibility = '11'
 
 configurations {
@@ -21,6 +25,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
@@ -30,9 +35,11 @@ dependencies {
 }
 
 sourceSets{
-	test{
-		java.srcDirs = ['src/test/java/unit', 'src/test/java/intg']
-	}
+	 test { 
+     	java { 
+      		srcDirs 'test' 
+     	}	 
+    } 
 }
 
 test {

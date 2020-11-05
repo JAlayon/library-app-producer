@@ -1,5 +1,7 @@
 package com.alayon.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ public class LibraryController {
 	private LibraryEventProducer libraryEventProducer;
 
 	@PostMapping("/v1/libraryevent")
-	public ResponseEntity<LibraryEvent> postLibraryEvent(@RequestBody final LibraryEvent libraryEvent)
+	public ResponseEntity<LibraryEvent> postLibraryEvent(@Valid @RequestBody final LibraryEvent libraryEvent)
 			throws Exception {
 
 		libraryEvent.setLibraryEventType(LibraryEventType.NEW);
