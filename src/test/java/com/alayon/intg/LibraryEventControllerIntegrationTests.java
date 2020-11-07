@@ -87,4 +87,5 @@ public class LibraryEventControllerIntegrationTests {
 
 		assertThat(value).isEqualTo(expectedRecord);
 	}
+
 }

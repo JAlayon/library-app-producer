@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,4 +34,19 @@ public class LibraryController {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(libraryEvent);
 	}
+
+	@PutMapping("/v1/libraryevent")
+	public ResponseEntity<?> putLibraryEvent(@Valid @RequestBody final LibraryEvent libraryEvent) throws Exception {
+
+		if (libraryEvent.getLibraryEventId() == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please paass the libraryEventId");
+		}
+		libraryEvent.setLibraryEventType(LibraryEventType.UPDATE);
+		log.info("Before sendLibraryEvent");
+		libraryEventProducer.sendLibraryEventApproach2(libraryEvent);
+		log.info("After sendLibraryEvent");
+
+		return ResponseEntity.status(HttpStatus.OK).body(libraryEvent);
+	}
+
 }
